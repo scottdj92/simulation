@@ -1,5 +1,4 @@
 //console.log('\'Allo \'Allo!');
-//
 import _ from 'underscore';
 import Marionette from 'backbone.marionette';
 import { PrinterModel } from 'app/scripts/modules/simulation/models/printer-model';

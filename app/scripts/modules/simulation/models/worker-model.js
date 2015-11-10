@@ -1,4 +1,4 @@
-import Backbone from 'backbone';
+import Backbone from 'bower_components/backbone/backbone.js';
 
 var WorkerModel = Backbone.Model.extend({
 	defaults: {
@@ -12,4 +12,4 @@ var WorkerModel = Backbone.Model.extend({
 	}
 });
 
-{ export WorkerModel };
+export { WorkerModel };

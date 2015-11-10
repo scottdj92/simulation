@@ -38,7 +38,7 @@ const testLintOptions = {
   }
 };
 
-gulp.task('lint', lint('app/scripts/**/*.js'));
+gulp.task('lint', lint('static/scripts/babel/**/*.js'));
 gulp.task('lint:test', lint('test/spec/**/*.js', testLintOptions));
 
 gulp.task('html', ['styles'], () => {
@@ -46,7 +46,7 @@ gulp.task('html', ['styles'], () => {
 
   return gulp.src('app/*.html')
     .pipe(assets)
-    .pipe($.if('*.js', $.uglify()))
+    .pipe($.if('static/scripts/traceur/**/*.js', $.uglify()))
     .pipe($.if('*.css', $.minifyCss({compatibility: '*'})))
     .pipe(assets.restore())
     .pipe($.useref())
@@ -155,10 +155,28 @@ gulp.task('wiredep', () => {
     .pipe(gulp.dest('app'));
 });
 
-gulp.task('build', ['lint', 'html', 'images', 'fonts', 'extras'], () => {
+gulp.task('build', ['babel', 'lint', 'html', 'images', 'fonts', 'extras'], () => {
   return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
+});
+
+gulp.task('traceur', function() {
+  gulp.src(['app/scripts/modules/simulation/**/*.js'])
+  .pipe($.plumber())
+  .pipe($.traceur({ blockBinding :true }))
+  .pipe(gulp.dest('static/scripts/traceur'));
+});
+
+gulp.task('babel', function() {
+  gulp.src(['/app/scripts/modules/simulation/**/*.js'])
+  .pipe($.plumber())
+  .pipe($.babel({
+    presets: ['es2015'],
+    comments: false
+  }))
+  .pipe(gulp.dest('static/scripts/babel'));
 });
 
 gulp.task('default', ['clean'], () => {
   gulp.start('build');
+  gulp.start('serve');
 });

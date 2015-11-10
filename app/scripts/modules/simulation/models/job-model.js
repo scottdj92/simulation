@@ -1,9 +1,9 @@
-import Backbone from 'backbone';
+import Backbone from 'bower_components/backbone/backbone.js';
 
 var JobModel = Backbone.Model.extend({
 	defaults: {
 		'duration': 0,
-		'pages', 0,
+		'pages': 0,
 		'inkDemand': 0,
 		'id': 0
 	},
@@ -13,4 +13,4 @@ var JobModel = Backbone.Model.extend({
 	}
 });
 
-{ export JobModel };
+export { JobModel };

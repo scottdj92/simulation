@@ -1,4 +1,4 @@
-import Backbone from 'backbone';
+import Backbone from 'bower_components/backbone/backbone.js';
 
 var PrinterModel = Backbone.Model.extend({
 	defaults: {
@@ -15,4 +15,4 @@ var PrinterModel = Backbone.Model.extend({
 	}
 });
 
-{ export PrinterModel };
+export { PrinterModel };
